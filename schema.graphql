@@ -1,0 +1,74 @@
+type Token @entity {
+  id: ID!
+  amount: String
+  denom: String
+}
+
+type Block @entity {
+  id: ID!
+  number: BigInt
+  timestamp: BigInt
+}
+
+type Reward @entity {
+  id: ID!
+  amount: String
+  validator: String
+}
+
+type Delegation @entity {
+  id: ID!
+  delegatorAddress: String
+  validatorAddress: String
+  amount: Coin
+}
+
+type Coin @entity {
+  id: ID!
+  denom: String
+  amount: String
+}
+
+type Agreement @entity {
+  id: ID!
+  name: String
+  did: String
+  
+}
+
+type PurchaseOrder @entity {
+  id: ID!
+  did: String
+  uri: String
+  amount: String
+  state: String
+  purchaser: String
+  seller: String
+  financer: String
+}
+
+type Invoice @entity {
+
+  id: ID!
+  did: String
+  uri: String
+  amount: String
+  state: String
+  purchaser: String
+  seller: String
+  factor: String
+
+}
+
+type Loan @entity {
+
+  id: ID!
+  amount: String
+  fee: String
+  collateral: String
+  deadline: String
+  state: String
+  borrower: String
+  lender: String
+
+}

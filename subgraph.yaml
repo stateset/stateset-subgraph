@@ -1,0 +1,34 @@
+specVersion: 0.0.4
+description: >-
+  A secure & decentralized way to participate in global commerce.
+repository: "https://github.com/stateset/stateset-subgraph"
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: cosmos
+    name: Stateset
+    network: stateset-1-testnet # This will change for each cosmos-based blockchain. In this case, the example uses the Cosmos Hub mainnet.
+    source:
+      startBlock: 0 # Required for Cosmos, set this to 0 to start indexing from chain genesis
+    mapping:
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Block
+        - Delegation
+        - Coin
+        - Loan
+        - Invoice
+        - PurchaseOrder
+        - Agreement
+      blockHandlers:
+        - handler: handleBlock # the function name in the mapping file
+      eventHandlers:
+        - event: rewards # the type of the event that will be handled
+          handler: handleReward # the function name in the mapping file
+      transactionHandlers:
+        - handler: handleTxn # the function name in the mapping file
+      messageHandlers:
+        - message: /cosmos.staking.v1beta1.MsgDelegate # the type of a message
+          handler: handleMsgDelegate # the function name in the mapping file
+      file: ./src/mapping.ts # link to the file with the Assemblyscript mappings
